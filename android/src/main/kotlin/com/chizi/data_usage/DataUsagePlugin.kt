@@ -242,15 +242,13 @@ class DataUsagePlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<out String>?,
-                                            grantResults: IntArray?): Boolean {
+                                            permissions: Array<out String>,
+                                            grantResults: IntArray): Boolean {
 
         when (requestCode) {
             myPermissionCode -> {
-                if (null != grantResults) {
-                    permissionGranted = grantResults.isNotEmpty() &&
-                            grantResults[0] == PackageManager.PERMISSION_GRANTED
-                }
+                permissionGranted = grantResults.isNotEmpty() &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED
 
                 if (permissionGranted && _result != null) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
